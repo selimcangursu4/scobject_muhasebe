@@ -104,4 +104,3 @@
    - **Yedekleme ve Geri Yükleme**: Veritabanı yedekleme ve geri yükleme işlemleri.
    - **Genel Ayarlar**: Tüm programın genel ayarları (temalar, dil, tarih formatı vb.).
 
-Bu menü yapısı, muhasebe programınızın her türlü ihtiyaca cevap verecek şekilde kapsamlı ve profesyonel görünmesini sağlar.
