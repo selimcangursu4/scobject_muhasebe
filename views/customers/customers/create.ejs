@@ -1,0 +1,247 @@
+<%- include('../../partials/header.ejs') %>
+<div class="container">
+    <div id="kt_app_content" class="app-content pb-0">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h3 class="card-title">Yeni Müşteri Ekle</h3>
+          <div class="card-toolbar">
+            <a href="/customers/view" type="button" class="btn btn-sm btn-secondary me-2">
+              <i class="fa-solid fa-arrow-rotate-left"></i> Geri Dön </a>
+            <button type="button" class="btn btn-sm btn-primary">
+              <i class="fa-regular fa-floppy-disk"></i> Kaydet </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <form class="row g-3 needs-validation" novalidate>
+            <label for="validationCustom05" class="form-label">Müşteri Türü :</label>
+            <div class="col-md-12">
+              <div class="btn-group w-100 w-lg-50" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button]">
+                <label class="btn btn-outline btn-color-muted btn-active-primary active" data-kt-button="true">
+                  <input class="btn-check" type="radio" name="legal_person" id="legal_person" value="1" /> Tüzel Kişi </label>
+                <label class="btn btn-outline btn-color-muted btn-active-primary" data-kt-button="true">
+                  <input class="btn-check" type="radio" name="real_person" id="real_person" value="2" /> Gerçek Kişi </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="company_name_area">
+                <label class="form-label">Firma Unvanı :</label>
+                <input type="text" class="form-control" id="company_name" name="company_name">
+              </div>
+              <div class="fullname_area" style="display: none;">
+                <label class="form-label">İsim Soyisim :</label>
+                <input type="text" class="form-control" id="company_name" name="company_name">
+              </div>
+            </div>
+            <div class="short_name_area col-md-6">
+              <label class="form-label">Kısa İsim :</label>
+              <input type="text" class="form-control" id="short_name" name="short_name">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Müşteri Kategorisi :</label>
+              <select class="form-select" data-control="select2" data-placeholder="Seçiniz...">
+                <option></option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">E-Posta Adresi :</label>
+              <input type="text" class="form-control" id="email" name="email">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Telefon Numarası :</label>
+              <input type="text" class="form-control" id="phone" name="phone">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Faks Numarası :</label>
+              <input type="text" class="form-control" id="fax_number" name="fax_number">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">IBAN :</label>
+              <input type="text" class="form-control" id="iban_number" name="iban_number">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Posta Kodu :</label>
+              <input type="text" class="form-control" id="validationCustom02">
+            </div>
+            <div class="col-md-12">
+              <label class="form-label">Adres Bilgisi</label>
+              <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">İl :</label>
+              <select class="form-select" data-control="select2" id="city_id" name="city_id" data-placeholder="Seçiniz...">
+                <option></option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">İlçe :</label>
+              <select class="form-select" data-control="select2" id="district_id" name="district_id" data-placeholder="Seçiniz...">
+                <option></option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+               <div class="vkn_area">
+                <label class="form-label">VKN / TCKN :</label>
+                 <input type="text" class="form-control" id="vkn-tckn" name="vkn-tckn">
+               </div>
+               <div class="tc_area" style="display: none;">
+                <label class="form-label">Tc Kimlik No :</label>
+                 <input type="text" class="form-control" id="vkn-tckn" name="vkn-tckn">
+               </div>
+            </div>
+            <div class="col-md-6">
+              <div class="tax_office_area">
+                <label class="form-label">Vergi Dairesi :</label>
+                <input type="text" class="form-control" id="tax_office" name="tax_office">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Döviz Kuru :</label>
+              <select class="form-select" data-control="select2" id="exchange_rate" name="exchange_rate" data-placeholder="Seçiniz...">
+                <option></option>
+                <option value="1">Açılış Bakiyesi Oluştur</option>
+                <option value="2">Açılış Bakiyesi Yok</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Açılış Bakiyesi :</label>
+              <select class="form-select" data-control="select2" id="opening_balance" name="opening_balance" data-placeholder="Seçiniz...">
+                <option></option>
+                <option value="1">Açılış Bakiyesi Oluştur</option>
+                <option value="2">Açılış Bakiyesi Yok</option>
+              </select>
+            </div>
+            <div class="opening-balance-area col-md-12" style="display: none;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label">Tarih :</label>
+                        <input type="date" class="form-control" id="opening_balance_date" name="opening_balance_date">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label">Tutar :</label>
+                        <input type="text" class="form-control" id="opening_balance_amount" name="opening_balance_amount">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label">Durum :</label>
+                        <select class="form-select" data-control="select2" id="opening_balance_status_id" name="opening_balance_status_id" data-placeholder="Seçiniz...">
+                            <option></option>
+                            <option value="1">Kişinin borcu var</option>
+                            <option value="2">Kişinin alacağı var</option>
+                            <option value="3">Kişiye verilmiş kapora var</option>
+                            <option value="4">Kişiden alınmış kapora var</option>
+                          </select>
+                      </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="fw-bold fs-6 text-gray-800">
+                                <th>Yetkili Kişi Adı</th>
+                                <th>Telefon</th>
+                                <th>E-Posta</th>
+                                <th>Not</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="AuthorizedPersonTbody">
+                            <!-- Satır -->
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" id="AddAuthorizedPerson" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-user-plus"></i> Yetkili Kişi Ekle
+                </button>
+            </div> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include('../../partials/footer.ejs') %>
+<script>
+        $(document).ready(function() {
+        // Datatable 
+        $("#kt_datatable_zero_configuration").DataTable();
+
+        // Gerçek Kişi & Tüzel Kişi 
+        $('#real_person').click(function(e) {
+            e.preventDefault();
+
+            $('.company_name_area').css('display', 'none');
+            $('.short_name_area').css('display', 'none');
+            $('.vkn_area').css('display', 'none');
+            $('.tax_office_area').css('display', 'none');
+            $('.fullname_area').css('display', 'block');
+            $('.tc_area').css('display', 'block');
+        });
+
+        $('#legal_person').click(function(e) {
+            e.preventDefault();
+            $('.company_name_area').css('display', 'block');
+            $('.short_name_area').css('display', 'block');
+            $('.vkn_area').css('display', 'block');
+            $('.tax_office_area').css('display', 'block');
+            $('.fullname_area').css('display', 'none');
+            $('.tc_area').css('display', 'none');
+        });
+
+        // Yetkili Kişi Ekle
+
+        $('#AddAuthorizedPerson').click(function(e) {
+            e.preventDefault();
+
+            const newLine = `
+        <tr>
+            <td>
+                <input type="text" class="form-control" name="authorizedPersonName[]">
+            </td>
+            <td>
+                <input type="text" class="form-control" name="authorizedPersonPhone[]">
+            </td>
+            <td>
+                <input type="text" class="form-control" name="authorizedPersonEmail[]">
+            </td>
+            <td>
+                <input type="text" class="form-control" name="authorizedPersonNote[]">
+            </td>
+            <td>
+                <button class="btn btn-danger btn-sm mt-1 remove-row">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    `;
+
+            $('#AuthorizedPersonTbody').append(newLine);
+        });
+
+
+        $(document).on('click', '.remove-row', function() {
+            $(this).closest('tr').remove();
+        });
+
+        // Açılış Bakiyesi 
+
+        $('#opening_balance').change(function(e){
+            e.preventDefault();
+
+           const balance_value = $(this).val();
+
+           if(balance_value == 1)
+           {
+            $('.opening-balance-area').css('display','block');
+           }else{
+            $('.opening-balance-area').css('display','none');
+           }
+        })
+
+
+    })
+</script>
