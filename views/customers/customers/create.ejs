@@ -7,12 +7,12 @@
           <div class="card-toolbar">
             <a href="/customers/view" type="button" class="btn btn-sm btn-secondary me-2">
               <i class="fa-solid fa-arrow-rotate-left"></i> Geri Dön </a>
-            <button type="button" class="btn btn-sm btn-primary">
+            <button type="button" id="customerSave" class="btn btn-sm btn-primary">
               <i class="fa-regular fa-floppy-disk"></i> Kaydet </button>
           </div>
         </div>
         <div class="card-body">
-          <form class="row g-3 needs-validation" novalidate>
+          <form id="newCustomerForm" class="row g-3">
             <label for="validationCustom05" class="form-label">Müşteri Türü :</label>
             <div class="col-md-12">
               <div class="btn-group w-100 w-lg-50" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button]">
@@ -29,7 +29,7 @@
               </div>
               <div class="fullname_area" style="display: none;">
                 <label class="form-label">İsim Soyisim :</label>
-                <input type="text" class="form-control" id="company_name" name="company_name">
+                <input type="text" class="form-control" id="fullname" name="fullname">
               </div>
             </div>
             <div class="short_name_area col-md-6">
@@ -38,11 +38,12 @@
             </div>
             <div class="col-md-6">
               <label class="form-label">Müşteri Kategorisi :</label>
-              <select class="form-select" data-control="select2" data-placeholder="Seçiniz...">
+              <select class="form-select" data-control="select2" data-placeholder="Seçiniz..." id="customer_categories_id" name="customer_categories_id">
                 <option></option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-              </select>
+                <% customer_categories.map((data) => { %>
+                    <option value="<%= data.id %>"><%= data.name %></option>
+                <% }) %>
+            </select>            
             </div>
             <div class="col-md-6">
               <label class="form-label">E-Posta Adresi :</label>
@@ -62,7 +63,7 @@
             </div>
             <div class="col-md-6">
               <label class="form-label">Posta Kodu :</label>
-              <input type="text" class="form-control" id="validationCustom02">
+              <input type="text" class="form-control" id="postal_code" name="postal_code">
             </div>
             <div class="col-md-12">
               <label class="form-label">Adres Bilgisi</label>
@@ -91,7 +92,7 @@
                </div>
                <div class="tc_area" style="display: none;">
                 <label class="form-label">Tc Kimlik No :</label>
-                 <input type="text" class="form-control" id="vkn-tckn" name="vkn-tckn">
+                 <input type="text" class="form-control" id="tc_number" name="tc_number">
                </div>
             </div>
             <div class="col-md-6">
@@ -104,8 +105,10 @@
               <label class="form-label">Döviz Kuru :</label>
               <select class="form-select" data-control="select2" id="exchange_rate" name="exchange_rate" data-placeholder="Seçiniz...">
                 <option></option>
-                <option value="1">Açılış Bakiyesi Oluştur</option>
-                <option value="2">Açılış Bakiyesi Yok</option>
+                <option value="1">TL</option>
+                <option value="2">USD</option>
+                <option value="2">EUR</option>
+                <option value="4">GBP</option>
               </select>
             </div>
             <div class="col-md-6">
@@ -193,33 +196,32 @@
         });
 
         // Yetkili Kişi Ekle
-
         $('#AddAuthorizedPerson').click(function(e) {
             e.preventDefault();
 
-            const newLine = `
-        <tr>
+          const newLine = `
+          <tr>
             <td>
-                <input type="text" class="form-control" name="authorizedPersonName[]">
+                <input type="text" placeholder="Ad Soyad" class="form-control" name="authorizedPersonName[]">
             </td>
             <td>
-                <input type="text" class="form-control" name="authorizedPersonPhone[]">
+                <input type="text" placeholder="Telefon Numarası" class="form-control" name="authorizedPersonPhone[]">
             </td>
             <td>
-                <input type="text" class="form-control" name="authorizedPersonEmail[]">
+                <input type="text" placeholder="E-Posta Adresi" class="form-control" name="authorizedPersonEmail[]">
             </td>
             <td>
-                <input type="text" class="form-control" name="authorizedPersonNote[]">
+                <input type="text" placeholder="Not" class="form-control" name="authorizedPersonNote[]">
             </td>
             <td>
                 <button class="btn btn-danger btn-sm mt-1 remove-row">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
-        </tr>
-    `;
+         </tr>
+         `;
 
-            $('#AuthorizedPersonTbody').append(newLine);
+         $('#AuthorizedPersonTbody').append(newLine);
         });
 
 
@@ -228,7 +230,6 @@
         });
 
         // Açılış Bakiyesi 
-
         $('#opening_balance').change(function(e){
             e.preventDefault();
 
@@ -240,7 +241,96 @@
            }else{
             $('.opening-balance-area').css('display','none');
            }
+        });
+
+        // Müşteriyi Kaydet
+
+        $('#customerSave').click(function(e){
+            e.preventDefault();
+
+            const formData = {  
+
+                customerTypeId : $("input[name='legal_person']:checked").val() || $("input[name='real_person']:checked").val(),
+                companyName: $('#company_name').val(),
+                fullname: $('#fullname').val(),
+                shortName: $('#short_name').val(),
+                customerCategory: $('#customer_categories_id').val(),
+                email: $('#email').val(),
+                phone: $('#phone').val(),
+                faxNumber: $('#fax_number').val(),
+                ibanNumber: $('#iban_number').val(),
+                postalCode: $('#postal_code').val(),
+                address: $('#address').val(),
+                city: $('#city_id').val(),
+                district: $('#district_id').val(),
+                vknTckn: $('#vkn-tckn').val() || $('#tc_number').val(),
+                taxOffice: $('#tax_office').val(),
+                exchangeRate: $('#exchange_rate').val(),
+                openingBalance: $('#opening_balance').val(),
+                opening_balance_date : $('#opening_balance_date').val(),
+                opening_balance_amount : $('#opening_balance_amount').val(),
+                opening_balance_status_id : $('#opening_balance_status_id').val(),
+                authorizedPersons: []
+            };
+
+            $('#AuthorizedPersonTbody  tr').each((data)=>{
+                const row = $(this);
+                formData.authorizedPersons.push({
+                    name:  row.find('input[name="authorizedPersonName[]"]').val(),
+                    phone: row.find('input[name="authorizedPersonPhone[]"]').val(),
+                    email: row.find('input[name="authorizedPersonEmail[]"]').val(),
+                    note:  row.find('input[name="authorizedPersonNote[]"]').val(),
+                })
+            })
+
+            console.log('Authorized Persons:', formData.authorizedPersons);
+
+            $.ajax({
+            url: '/customer/store',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function (response) {
+            console.log(response.message);
+            if(response.success)
+            {
+                Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 2000
+                });
+                setTimeout(() => {
+                    $('#newCustomerForm')[0].reset(); 
+                }, 2200);
+            }else{
+                Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 2000
+                });
+            }
+            },
+             error: function (error) {
+             console.error(error);
+             Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: error,
+                showConfirmButton: false,
+                timer: 2000
+                });
+                setTimeout(() => {
+                    $('#newCustomerForm')[0].reset(); 
+                }, 2200);
+            }
+            });
+        
         })
+
 
 
     })
